@@ -19,8 +19,12 @@ class TriviaScreen extends React.Component {
   }
 
   _onPressOption = (questionOption) => {
-    console.log("_onPressOption");
-    console.log(questionOption);
+    this.props.nextQuestion(
+      questionOption,
+      this.props.currentQuestionIndex,
+      this.props.questions,
+      this.props.totalScore
+    );
   };
 
   render() {
@@ -98,17 +102,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ trivia }) => {
-
-  const { currentQuestionIndex, questions } = trivia;
+  const { currentQuestionIndex, questions, totalScore } = trivia;
 
   return {
     currentQuestion: questions[currentQuestionIndex],
     totalQuestionsSize: questions.length,
     currentQuestionNumber: currentQuestionIndex + 1,
     questions,
-    currentQuestionIndex
+    currentQuestionIndex,
+    totalScore
   };
-
 };
 
 export default connect(mapStateToProps,

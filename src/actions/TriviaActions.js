@@ -2,6 +2,8 @@ import { AllHtmlEntities as entities } from 'html-entities';
 import {
   TRIVIA_FETCH_SUCCESS,
   TRIVIA_FETCH_ERROR,
+  TRIVIA_NEXT_QUESTION,
+  TRIVIA_GAME_OVER
 } from './types';
 import * as TriviaAPI from '../TriviaAPI';
 
@@ -30,5 +32,34 @@ export const triviaFetch = () => {
     }).catch(function () {
       dispatch({ type: TRIVIA_FETCH_ERROR });
     });
+  }
+};
+
+/**
+ * @description Validate answer, and dispatch action to move to next question or game over.
+ * @param {string} currentAnswer - Currect answer selected by the user.
+ * @param {number} currentQuestionIndex - Current question selected by the user.
+ * @param {Object[]} questions - The array with the questions.
+ * @param {*} totalScore - The total score of the user.
+ */
+export const nextQuestion = (currentAnswer, currentQuestionIndex, questions, totalScore) => {
+
+  return (dispatch) => {
+    const nextIndex = currentQuestionIndex + 1;
+    let totalQuestionsSize = questions.length;
+
+    // Validate current answer
+    if (currentAnswer === questions[currentQuestionIndex]) {
+      totalScore += 1;
+    }
+
+    console.log(`Total Score: ${totalScore}`);
+
+    if (nextIndex < totalQuestionsSize) {
+      dispatch({ type: TRIVIA_NEXT_QUESTION, payload: { currentQuestionIndex: nextIndex, totalScore } });
+    }
+    else {
+      dispatch({ type: TRIVIA_GAME_OVER, payload: totalScore });
+    }
   }
 };
