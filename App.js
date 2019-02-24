@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/reducers';
-import TriviaScreen from './src/components/screens/TriviaScreen';
+import Router from './src/Router';
 
 export default class App extends React.Component {
 
@@ -11,7 +11,7 @@ export default class App extends React.Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
-        <TriviaScreen />
+        <Router />
       </Provider>
     );
   }

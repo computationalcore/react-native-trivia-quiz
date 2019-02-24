@@ -21,7 +21,7 @@ const propTypes = {
  */
 
 /**
- * @description	Represents a individual Quiz Option.
+ * @description	Individual quiz question option component.
  * @constructor
  * @param {Object} props - The props that were defined by the caller of this component.
  * @param {string} props.optionDescription - The text of the option.
@@ -30,8 +30,6 @@ const propTypes = {
 class QuestionOptionItem extends PureComponent {
 
   _onPress = () => {
-    console.log('QuestionOptionItem Pressed : ');
-    console.log(this.props.optionDescription);
     this.props.onPressItem(this.props.optionDescription);
   };
 

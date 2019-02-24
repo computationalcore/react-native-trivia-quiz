@@ -1,5 +1,7 @@
+import { Actions } from 'react-native-router-flux';
 import { AllHtmlEntities as entities } from 'html-entities';
 import {
+  TRIVIA_START_GAME,
   TRIVIA_FETCH_SUCCESS,
   TRIVIA_FETCH_ERROR,
   TRIVIA_NEXT_QUESTION,
@@ -31,9 +33,10 @@ export const triviaFetch = () => {
           }
         }
       );
+      // console.log(formatedQuestions);
       dispatch({ type: TRIVIA_FETCH_SUCCESS, payload: formatedQuestions });
-    }).catch(function () {
-      dispatch({ type: TRIVIA_FETCH_ERROR });
+    }).catch(function (error) {
+      dispatch({ type: TRIVIA_FETCH_ERROR, payload: error });
     });
   }
 };
@@ -56,13 +59,25 @@ export const nextQuestion = (currentAnswer, currentQuestionIndex, questions, tot
       totalScore += 1;
     }
 
-    console.log(`Total Score: ${totalScore}`);
-
     if (nextIndex < totalQuestionsSize) {
       dispatch({ type: TRIVIA_NEXT_QUESTION, payload: { currentQuestionIndex: nextIndex, totalScore } });
     }
     else {
       dispatch({ type: TRIVIA_GAME_OVER, payload: totalScore });
+      // Call game over screen and disable back action
+      Actions.gameOver({ type: 'reset' });
     }
+  }
+};
+
+/**
+ * @description Start Trivia Game.
+ */
+export const startGame = () => {
+
+  return (dispatch) => {
+    dispatch({ type: TRIVIA_START_GAME });
+    // Call start game and disable back action
+    Actions.triviaGame({ type: 'reset' });
   }
 };

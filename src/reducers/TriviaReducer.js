@@ -1,5 +1,7 @@
 import {
+  TRIVIA_START_GAME,
   TRIVIA_FETCH_SUCCESS,
+  TRIVIA_FETCH_ERROR,
   TRIVIA_NEXT_QUESTION,
   TRIVIA_GAME_OVER
 } from '../actions/types';
@@ -18,16 +20,29 @@ const INITIAL_STATE = {
   totalScore: 0,
   startTime: 0,
   endTime: 0,
+  loading: true,
+  error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case TRIVIA_START_GAME:
+      return INITIAL_STATE;
     case TRIVIA_FETCH_SUCCESS:
       return { 
         ...state, 
         questions: action.payload, 
         totalQuestionsSize: action.payload.length,
         startTime: (new Date).getTime(),
+        loading: false,
+        error: '',  
+      };
+    case TRIVIA_FETCH_ERROR:
+      return { 
+        ...state, 
+        startTime: (new Date).getTime(),
+        loading: false,
+        error: action.payload,  
       };
     case TRIVIA_NEXT_QUESTION:
       return { 

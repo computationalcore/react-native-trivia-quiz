@@ -32,7 +32,7 @@ const defaultProps = {
  */
 
 /**
- * @description	Represents a individual Quiz Question.
+ * @description	Individual quiz question with options.
  * @constructor
  * @param {Object} props - The props that were defined by the caller of this component.
  * @param {string} props.category - The id of the book.
@@ -63,7 +63,7 @@ function Question(props) {
           )}
           keyExtractor={(item, index) => `${index}-${item}`}
           onPressItem={props.onItemSelected}
-          scrollEnabled={false}
+          scrollEnabled={true}
         />
     </View>
   );
