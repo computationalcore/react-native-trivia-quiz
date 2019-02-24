@@ -1,39 +1,42 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   View,
   Text,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
+import LottieView from 'lottie-react-native';
 import * as actions from '../../actions';
+import Button from '../Button';
 import Question from '../Question';
 
-// Game background image
-const BACKGROUND_IMAGE = require('../../../assets/images/game_background_active.png');
+// Assets
+const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
+const BACKGROUND_IMAGE_ACTIVE = require('../../../assets/images/game_background_active.png');
+const LOADING_ANIMATION = require('../../../assets/animations/2151-loading-hamster.json');
+const ERROR_ANIMATION = require('../../../assets/animations/4386-connection-error.json');
 
 /**
  * @description	Main Menu screen.
  * @constructor
- * @param {Object} props - The props that were defined by the caller of this component.
- * @param {function} props.currentQuestionIndex - Callback when user clicks start game button.
- * @param {function} props.questions - Callback when user clicks start game button.
- * @param {function} props.totalScore - Callback when user clicks start game button.
- * @param {function} props.currentQuestionIndex - Callback when user clicks start game button.
- * @param {function} props.currentQuestionIndex - Callback when user clicks start game button.
- * @param {function} props.currentQuestionIndex - Callback when user clicks start game button.
  */
 class TriviaGame extends React.Component {
 
+  /**
+	 * Lifecycle event handler called just after the App loads into the DOM.
+	 * Call the action to fetch quiz data.
+	 */
   componentWillMount() {
-    this.getQuestions()
-  }
-
-  getQuestions = () => {
     this.props.triviaFetch();
   }
 
-  _onPressOption = (questionOption) => {
+  /**
+   * @description Call action to move to the next question or end the game.
+   * @param {string} questionOption - The text of the selected question option.
+   */
+  onPressOption = (questionOption) => {
     this.props.nextQuestion(
       questionOption,
       this.props.currentQuestionIndex,
@@ -53,10 +56,39 @@ class TriviaGame extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           style={styles.imageBackground}
-          source={BACKGROUND_IMAGE}
+          source={(this.props.loading || this.props.error) ? BACKGROUND_IMAGE : BACKGROUND_IMAGE_ACTIVE}
           resizeMode="cover"
         >
-          {(!this.props.loading) &&
+          {(this.props.loading || this.props.error) ? (
+            (this.props.loading) ? (
+              <View style={styles.loaderContainer}>
+                <LottieView
+                  style={styles.loaderAnimation}
+                  source={LOADING_ANIMATION}
+                  autoPlay
+                  loop
+                />
+                <Text style={styles.loaderText}>Requesting Questions</Text>
+              </View>
+            ) : (
+              <View style={styles.loaderContainer}>
+                <LottieView
+                    style={styles.errorAnimation}
+                    source={ERROR_ANIMATION}
+                    autoPlay
+                    loop
+                />
+                <Text style={styles.errorText}>Request Error</Text>
+                <Text style={styles.errorDescription}>Unable to get questions from server.</Text>
+                <Text style={styles.errorDescription}>Possible reasons:</Text>
+                <Text style={[styles.errorDescription, styles.errorIssue]}> - Internet connectivity issue</Text>
+                <Text style={[styles.errorDescription, styles.errorIssue]}> - Server Instability</Text>                
+                <Button onPress={() => this.props.startGame()}>
+                  Try Again
+                </Button>
+              </View>
+            )
+          ) : (
             <View style={styles.container}>
               <View style={styles.headerContainer}>
                 <Text style={styles.headerTitle}>Question {currentQuestionNumber}/{totalQuestionsSize}</Text>
@@ -67,11 +99,10 @@ class TriviaGame extends React.Component {
                 type={currentQuestion.type}
                 difficulty={currentQuestion.difficulty}
                 category={currentQuestion.category}
-                onItemSelected={this._onPressOption}
+                onItemSelected={this.onPressOption}
               />
             </View>
-          }
-          
+          )}          
         </ImageBackground>
       </View>
     );
@@ -86,28 +117,53 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 0,
   },
-
   loaderContainer: {
     flex: 1,
+    height: '100%',
+    width: '100%',
     paddingTop: 0,
     borderWidth: 2,
     borderRadius: 8,
     borderColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
+  loaderAnimation: {
+    width: 200,
+    height: 200
+  },
+  errorAnimation: {
+    width: 100,
+    height: 100
+  },
   loaderText: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    fontSize: 30,
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    color: '#00AA38'
+  },
+  errorText: {
+    fontSize: 30,
+    color: '#FF4423',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10,
+    marginBottom: 10,
+  },
+  errorDescription: {
     fontSize: 20,
+    textAlign: 'center',
+    marginBottom: 0,
+  },
+  errorIssue: {
+    marginBottom: 0,
+    fontStyle: 'italic',
   },
   imageBackground: {
     flex: 1,
     height: '100%',
     width: '100%',
-
     flexDirection: 'column',
     justifyContent: 'space-between',
   },

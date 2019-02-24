@@ -33,10 +33,10 @@ export const triviaFetch = () => {
           }
         }
       );
-      // console.log(formatedQuestions);
+      console.log(formatedQuestions);
       dispatch({ type: TRIVIA_FETCH_SUCCESS, payload: formatedQuestions });
-    }).catch(function (error) {
-      dispatch({ type: TRIVIA_FETCH_ERROR, payload: error });
+    }).catch(function () {
+      dispatch({ type: TRIVIA_FETCH_ERROR });
     });
   }
 };

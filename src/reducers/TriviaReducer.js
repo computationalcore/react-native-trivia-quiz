@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   startTime: 0,
   endTime: 0,
   loading: true,
-  error: ''
+  error: true
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -42,7 +42,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state, 
         startTime: (new Date).getTime(),
         loading: false,
-        error: action.payload,  
+        error: true,
       };
     case TRIVIA_NEXT_QUESTION:
       return { 

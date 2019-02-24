@@ -56,7 +56,7 @@ class MainMenu extends React.Component {
             <Text style={styles.gameTitle}> TRIVIA QUIZ </Text>
           </View>
           }
-          <Button onPress={() => this.props.startGame()}>
+          <Button style={styles.startButton} onPress={() => this.props.startGame()}>
             Start Quiz
           </Button>
         </ImageBackground>
@@ -84,11 +84,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 60
   },
+  startButton: {
+    marginBottom: 30
+  },
   imageBackground: {
     flex: 1,
     height: '100%',
     width: '100%',
-
     justifyContent: 'flex-end',
   },
 });

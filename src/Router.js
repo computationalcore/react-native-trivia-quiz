@@ -7,8 +7,8 @@ import MainMenu from './components/screens/MainMenu';
 const RouterComponent = () => {
   return (
     <Router>
-      <Scene key="main" hideNavBar={true} initial>
-        <Scene key="mainMenu" component={MainMenu} />
+      <Scene key="main" hideNavBar={true}>
+        <Scene key="mainMenu" component={MainMenu} initial />
         <Scene key="triviaGame" component={TriviaGame} />
         <Scene key="gameOver" component={GameOver} />
       </Scene>

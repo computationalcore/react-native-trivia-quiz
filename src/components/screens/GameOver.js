@@ -50,7 +50,7 @@ class GameOver extends React.Component {
     const { elapsedTime, totalQuestionsNumber, totalScore } = this.props;
     // Change score color based on value
     const scorePercent = totalScore / totalQuestionsNumber;
-    const scoreColor = (scorePercent >= 0.8) ? '#14AB00': (scorePercent >= 0.5) ? '#D9E100' : '#FF2020';
+    const scoreColor = (scorePercent >= 0.8) ? '#14AB00': (scorePercent >= 0.5) ? '#8f61f9' : '#FF2020';
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   },
   gameScoreText: {
     fontFamily: 'game-over',
-    textShadowColor: 'black',
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
     fontSize: 36,
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 36,
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
     color: '#8f61f9',
     marginTop: 10,
     marginBottom: 10,
