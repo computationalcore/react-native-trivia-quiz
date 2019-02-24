@@ -5,6 +5,7 @@ import {
   TRIVIA_NEXT_QUESTION,
   TRIVIA_GAME_OVER
 } from './types';
+import { shuffleArray } from '../Utils';
 import * as TriviaAPI from '../TriviaAPI';
 
 /**
@@ -16,8 +17,10 @@ export const triviaFetch = () => {
     TriviaAPI.getQuestions().then((questions) => {
       const formatedQuestions = questions.map(
         question => {
-          const options = question.incorrect_answers;
+          let options = question.incorrect_answers;
           options.push(question.correct_answer);
+          options = shuffleArray(options);
+
           return {
             options: options.map(option => entities.decode(option)),
             category: question.category,
@@ -49,7 +52,7 @@ export const nextQuestion = (currentAnswer, currentQuestionIndex, questions, tot
     let totalQuestionsSize = questions.length;
 
     // Validate current answer
-    if (currentAnswer === questions[currentQuestionIndex]) {
+    if (currentAnswer === questions[currentQuestionIndex].correct_answer) {
       totalScore += 1;
     }
 
