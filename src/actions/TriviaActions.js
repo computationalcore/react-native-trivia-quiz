@@ -1,3 +1,4 @@
+import { AllHtmlEntities as entities } from 'html-entities';
 import {
   TRIVIA_FETCH_SUCCESS,
   TRIVIA_FETCH_ERROR,
@@ -16,12 +17,12 @@ export const triviaFetch = () => {
           const options = question.incorrect_answers;
           options.push(question.correct_answer);
           return {
-            options: options,
+            options: options.map(option => entities.decode(option)),
             category: question.category,
             difficulty: question.difficulty,
             type: question.type,
             correct_answer: question.correct_answer,
-            question: question.question
+            question: entities.decode(question.question)
           }
         }
       );

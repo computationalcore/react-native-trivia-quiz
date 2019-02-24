@@ -4,20 +4,13 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  Image,
-  Button,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
-  Modal,
-  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import Question from '../Question';
 
 // Game background image
-const BACKGROUND_IMAGE = require('../../../assets/bg.png');
+const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
 
 class TriviaScreen extends React.Component {
 
@@ -61,6 +54,9 @@ class TriviaScreen extends React.Component {
   }
 }
 
+/**
+ * TriviaScreen component StyleSheet.
+ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
