@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vinbusquet.triviagame"
+    },
+    "android": {
+      "package": "com.vinbusquet.triviagame"
     }
   }
 }
