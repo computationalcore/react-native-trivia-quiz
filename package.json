@@ -9,6 +9,7 @@
   "dependencies": {
     "expo": "^32.0.0",
     "html-entities": "^1.2.1",
+    "lottie-react-native": "^2.5.11",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-router-flux": "^4.0.6",
