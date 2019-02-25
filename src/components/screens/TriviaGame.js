@@ -1,25 +1,18 @@
 import React from 'react';
 import {
-  ActivityIndicator,
   View,
   Text,
   StyleSheet,
-  ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
-import LottieView from 'lottie-react-native';
-import * as actions from '../../actions';
 import Button from '../Button';
 import Question from '../Question';
-
-// Assets
-const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
-const BACKGROUND_IMAGE_ACTIVE = require('../../../assets/images/game_background_active.png');
-const LOADING_ANIMATION = require('../../../assets/animations/2151-loading-hamster.json');
-const ERROR_ANIMATION = require('../../../assets/animations/4386-connection-error.json');
+import TriviaLoader from '../TriviaLoader';
+import * as actions from '../../actions';
+import { capitalizeFirstLetter } from '../../Utils';
 
 /**
- * @description	Main Menu screen.
+ * @description	Trivia Game Screen.
  * @constructor
  */
 class TriviaGame extends React.Component {
@@ -29,7 +22,12 @@ class TriviaGame extends React.Component {
 	 * Call the action to fetch quiz data.
 	 */
   componentWillMount() {
-    this.props.triviaFetch();
+    const { selectedCategoryId, selectedDifficulty, numberOfQuestions } = this.props;
+    this.props.triviaFetch(
+      selectedCategoryId, 
+      selectedDifficulty, 
+      numberOfQuestions
+    );
   }
 
   /**
@@ -53,58 +51,42 @@ class TriviaGame extends React.Component {
     } = this.props;
 
     return (
-      <View style={styles.container}>
-        <ImageBackground
-          style={styles.imageBackground}
-          source={(this.props.loading || this.props.error) ? BACKGROUND_IMAGE : BACKGROUND_IMAGE_ACTIVE}
-          resizeMode="cover"
+      <TriviaLoader
+          loading={this.props.loading}
+          error={this.props.error}
+          loadingText="Requesting Questions"
+          onRetryPressed={() => this.props.startGame()}
         >
-          {(this.props.loading || this.props.error) ? (
-            (this.props.loading) ? (
-              <View style={styles.loaderContainer}>
-                <LottieView
-                  style={styles.loaderAnimation}
-                  source={LOADING_ANIMATION}
-                  autoPlay
-                  loop
-                />
-                <Text style={styles.loaderText}>Requesting Questions</Text>
-              </View>
-            ) : (
-              <View style={styles.loaderContainer}>
-                <LottieView
-                    style={styles.errorAnimation}
-                    source={ERROR_ANIMATION}
-                    autoPlay
-                    loop
-                />
-                <Text style={styles.errorText}>Request Error</Text>
-                <Text style={styles.errorDescription}>Unable to get questions from server.</Text>
-                <Text style={styles.errorDescription}>Possible reasons:</Text>
-                <Text style={[styles.errorDescription, styles.errorIssue]}> - Internet connectivity issue</Text>
-                <Text style={[styles.errorDescription, styles.errorIssue]}> - Server Instability</Text>                
-                <Button onPress={() => this.props.startGame()}>
-                  Try Again
-                </Button>
-              </View>
-            )
-          ) : (
-            <View style={styles.container}>
-              <View style={styles.headerContainer}>
-                <Text style={styles.headerTitle}>Question {currentQuestionNumber}/{totalQuestionsSize}</Text>
-              </View>
-              <Question
-                question={currentQuestion.question}
-                options={currentQuestion.options}
-                type={currentQuestion.type}
-                difficulty={currentQuestion.difficulty}
-                category={currentQuestion.category}
-                onItemSelected={this.onPressOption}
-              />
+        {(false) ? (
+          <View style={styles.noDataContainer}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerTitle}>No Quiz Available</Text>
             </View>
-          )}          
-        </ImageBackground>
-      </View>
+            <Text style={styles.noDataText}>No Quiz questions available for {this.props.selectedCategory} category,
+            {this.props.selectedDifficulty} difficulty, and {this.props.numberOfQuestions} questions.</Text>
+            <Text style={styles.noDataText}>NOTE: Sometimes lowering the number of questions for the same category and difficulty works.</Text>
+            <Button onPress={this.props.startGameSelection}>
+              Try Again with new Options
+            </Button>
+          </View>
+        ) : (
+          <View style={styles.container}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.headerTitle}>Question {currentQuestionNumber}/{totalQuestionsSize}</Text>
+              <Text style={styles.categoryText}>{this.props.selectedCategory} - {capitalizeFirstLetter(currentQuestion.difficulty)}</Text>
+            </View>
+            
+            <Question
+              question={currentQuestion.question}
+              options={currentQuestion.options}
+              type={currentQuestion.type}
+              difficulty={currentQuestion.difficulty}
+              category={currentQuestion.category}
+              onItemSelected={this.onPressOption}
+            />
+          </View>
+        )}
+        </TriviaLoader>
     );
   }
 }
@@ -113,11 +95,7 @@ class TriviaGame extends React.Component {
  * TriviaScreen component StyleSheet.
  */
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 0,
-  },
-  loaderContainer: {
+  noDataContainer: {
     flex: 1,
     height: '100%',
     width: '100%',
@@ -130,45 +108,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
-  loaderAnimation: {
-    width: 200,
-    height: 200
-  },
-  errorAnimation: {
-    width: 100,
-    height: 100
-  },
-  loaderText: {
-    fontSize: 30,
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
-    color: '#00AA38'
-  },
-  errorText: {
-    fontSize: 30,
-    color: '#FF4423',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
-    marginBottom: 10,
-  },
-  errorDescription: {
+  noDataText: {
     fontSize: 20,
-    textAlign: 'center',
-    marginBottom: 0,
+    padding: 10,
+    textAlign: 'justify',
   },
-  errorIssue: {
-    marginBottom: 0,
-    fontStyle: 'italic',
-  },
-  imageBackground: {
+  container: {
     flex: 1,
-    height: '100%',
-    width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    paddingTop: 0,
   },
   headerContainer: {
-    flexDirection: 'row',
+    //flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingRight: 24,
@@ -188,20 +138,40 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '900',
   },
+  categoryText: {
+    fontWeight: '300',
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: '900',
+  },
 });
 
 const mapStateToProps = ({ trivia }) => {
-  const { currentQuestionIndex, error, loading, questions, totalScore } = trivia;
-
-  return {
-    currentQuestion: questions[currentQuestionIndex],
-    totalQuestionsSize: questions.length,
-    currentQuestionNumber: currentQuestionIndex + 1,
+  const { 
+    categories,
+    currentQuestionIndex,
     error,
     loading,
     questions,
+    totalScore,
+    selectedCategoryId,
+    selectedDifficulty,
+    numberOfQuestions
+  } = trivia;
+
+  return {
+    currentQuestion: questions[currentQuestionIndex],
+    currentQuestionNumber: currentQuestionIndex + 1,
+    selectedCategory: categories.filter(category => category.value === selectedCategoryId)[0].label,
+    totalQuestionsSize: questions.length,
     currentQuestionIndex,
-    totalScore
+    error,
+    loading,
+    numberOfQuestions,
+    questions,
+    totalScore,
+    selectedCategoryId,
+    selectedDifficulty,
   };
 };
 

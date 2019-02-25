@@ -4,12 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
 import Button from '../Button';
-import { startGame } from '../../actions';
+import { startGameSelection } from '../../actions';
 
 // Game background image
 const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
@@ -56,7 +55,7 @@ class MainMenu extends React.Component {
             <Text style={styles.gameTitle}> TRIVIA QUIZ </Text>
           </View>
           }
-          <Button style={styles.startButton} onPress={() => this.props.startGame()}>
+          <Button style={styles.startButton} onPress={this.props.startGameSelection}>
             Start Quiz
           </Button>
         </ImageBackground>
@@ -99,4 +98,4 @@ const mapStateToProps = (state) => {
   return state;
 };
 
-export default connect(mapStateToProps, { startGame })(MainMenu);
+export default connect(mapStateToProps, { startGameSelection })(MainMenu);

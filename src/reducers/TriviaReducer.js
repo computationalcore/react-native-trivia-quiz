@@ -1,5 +1,7 @@
 import {
+  TRIVIA_SELECT_OPTIONS_GAME,
   TRIVIA_START_GAME,
+  TRIVIA_FETCH_CATEGORIES_SUCCESS,
   TRIVIA_FETCH_SUCCESS,
   TRIVIA_FETCH_ERROR,
   TRIVIA_NEXT_QUESTION,
@@ -21,13 +23,37 @@ const INITIAL_STATE = {
   startTime: 0,
   endTime: 0,
   loading: true,
-  error: true
+  error: true,
+  categories: [{
+    label: 'Any',
+    value: -1
+  }],
+  selectedCategoryId: -1,
+  selectedDifficulty: 'Mixed',
+  numberOfQuestions: 10
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TRIVIA_START_GAME:
+    case TRIVIA_SELECT_OPTIONS_GAME:
       return INITIAL_STATE;
+    case TRIVIA_START_GAME:
+      return { 
+        ...state,
+        selectedCategoryId: (action.payload.categoryId) ? action.payload.categoryId : state.selectedCategoryId,
+        selectedDifficulty: (action.payload.difficulty) ? action.payload.difficulty : state.selectedDifficulty,
+        numberOfQuestions: (action.payload.numberOfQuestions) ? action.payload.numberOfQuestions: state.numberOfQuestions,
+        currentQuestionIndex: 0,
+        totalScore: 0,
+        loading: true,
+      };
+    case TRIVIA_FETCH_CATEGORIES_SUCCESS:
+      return { 
+        ...state,
+        categories: action.payload,
+        loading: false,
+        error: '',  
+      };
     case TRIVIA_FETCH_SUCCESS:
       return { 
         ...state, 

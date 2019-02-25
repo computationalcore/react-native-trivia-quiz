@@ -20,3 +20,11 @@ export const shuffleArray = (array) => {
   }
   return array;
 }
+
+/**
+ * @description Capitalize fist letter of a string.
+ * @param {string} str 
+ */
+export const capitalizeFirstLetter = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

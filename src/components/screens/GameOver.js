@@ -4,11 +4,10 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
-import { startGame } from '../../actions';
+import { startGame, startGameSelection } from '../../actions';
 import Button from '../Button';
 
 
@@ -47,7 +46,14 @@ class GameOver extends React.Component {
 
   render() {
 
-    const { elapsedTime, totalQuestionsNumber, totalScore } = this.props;
+    const { 
+      elapsedTime,
+      selectedCategory,
+      selectedDifficulty,
+      totalQuestionsNumber,
+      totalScore
+    } = this.props;
+
     // Change score color based on value
     const scorePercent = totalScore / totalQuestionsNumber;
     const scoreColor = (scorePercent >= 0.8) ? '#14AB00': (scorePercent >= 0.5) ? '#8f61f9' : '#FF2020';
@@ -64,8 +70,13 @@ class GameOver extends React.Component {
               <Text style={[styles.gameScoreText, { color: scoreColor }]}
               >Total Score: {totalScore} of {totalQuestionsNumber}</Text>
               <Text style={styles.gameTimeText}>Elapsed Time: {elapsedTime} seconds</Text>
+              <Text style={styles.gameTimeText}>Category: {selectedCategory}</Text>
+              <Text style={styles.gameTimeText}>Difficulty: {selectedDifficulty}</Text>
               <Button onPress={() => this.props.startGame()}>
                 Play Again
+              </Button>
+              <Button onPress={this.props.startGameSelection}>
+                Play again with new Options
               </Button>
             </View>
           }
@@ -137,14 +148,20 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ trivia }) => {
-  const { totalScore, startTime, endTime, questions } = trivia;
+  const { categories, endTime, questions, startTime, selectedCategoryId, selectedDifficulty, totalScore } = trivia;
 
   // Elapsed time in seconds
   const elapsedTime = Math.round((endTime - startTime) / 1000);
 
   const totalQuestionsNumber = questions.length;
 
-  return { elapsedTime, totalQuestionsNumber, totalScore };
+  return {
+    selectedCategory: categories.filter(category => category.value === selectedCategoryId)[0].label,
+    elapsedTime,
+    selectedDifficulty,
+    totalQuestionsNumber,
+    totalScore
+  };
 };
 
-export default connect(mapStateToProps, { startGame })(GameOver);
+export default connect(mapStateToProps, { startGame, startGameSelection })(GameOver);

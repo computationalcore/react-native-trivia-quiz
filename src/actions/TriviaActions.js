@@ -1,7 +1,10 @@
 import { Actions } from 'react-native-router-flux';
 import { AllHtmlEntities as entities } from 'html-entities';
+import sortBy from 'sort-by';
 import {
+  TRIVIA_SELECT_OPTIONS_GAME,
   TRIVIA_START_GAME,
+  TRIVIA_FETCH_CATEGORIES_SUCCESS,
   TRIVIA_FETCH_SUCCESS,
   TRIVIA_FETCH_ERROR,
   TRIVIA_NEXT_QUESTION,
@@ -11,12 +14,40 @@ import { shuffleArray } from '../Utils';
 import * as TriviaAPI from '../TriviaAPI';
 
 /**
- * @description Fetch the questions, parse the response and dispatch success or error action.
+ * @description Fetch the quiz categories, parse the response and dispatch success or error action.
  */
-export const triviaFetch = () => {
+export const triviaCategoryFetch = () => {
   
   return (dispatch) => {
-    TriviaAPI.getQuestions().then((questions) => {
+    TriviaAPI.getCategories().then((categories) => {
+      console.log(categories);
+      categories = categories.map(
+        category => {
+          return {
+            label: category.name,
+            value: category.id
+          }
+        }
+      ).sort(sortBy('label'));
+      // Add 'Any' options a the beginning of the array
+      categories.unshift({
+        label: 'Any',
+        value: -1
+      });
+      dispatch({ type: TRIVIA_FETCH_CATEGORIES_SUCCESS, payload: categories });
+    }).catch(function () {
+      dispatch({ type: TRIVIA_FETCH_ERROR });
+    });
+  }
+};
+
+/**
+ * @description Fetch the questions, parse the response and dispatch success or error action.
+ */
+export const triviaFetch = (selectedCategoryId, selectedDifficulty, numberOfQuestions) => {
+  
+  return (dispatch) => {
+    TriviaAPI.getQuestions(numberOfQuestions, selectedCategoryId, selectedDifficulty).then((questions) => {
       const formatedQuestions = questions.map(
         question => {
           let options = question.incorrect_answers;
@@ -33,13 +64,14 @@ export const triviaFetch = () => {
           }
         }
       );
-      console.log(formatedQuestions);
+      //console.log(formatedQuestions);
       dispatch({ type: TRIVIA_FETCH_SUCCESS, payload: formatedQuestions });
     }).catch(function () {
       dispatch({ type: TRIVIA_FETCH_ERROR });
     });
   }
 };
+
 
 /**
  * @description Validate answer, and dispatch action to move to next question or game over.
@@ -73,11 +105,22 @@ export const nextQuestion = (currentAnswer, currentQuestionIndex, questions, tot
 /**
  * @description Start Trivia Game.
  */
-export const startGame = () => {
-
+export const startGame = (categoryId, difficulty, numberOfQuestions) => {
   return (dispatch) => {
-    dispatch({ type: TRIVIA_START_GAME });
+    dispatch({ type: TRIVIA_START_GAME, payload: { categoryId, difficulty, numberOfQuestions } });
     // Call start game and disable back action
     Actions.triviaGame({ type: 'reset' });
+  }
+};
+
+/**
+ * @description Start Game Selection.
+ */
+export const startGameSelection = () => {
+  
+  return (dispatch) => {
+    dispatch({ type: TRIVIA_SELECT_OPTIONS_GAME });
+    // Call start game and disable back action
+    Actions.triviaSelection({ type: 'reset' });
   }
 };

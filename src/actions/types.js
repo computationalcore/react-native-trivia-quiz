@@ -1,4 +1,7 @@
+export const TRIVIA_SELECT_OPTIONS_GAME = 'trivia_select_options_game';
 export const TRIVIA_START_GAME = 'trivia_start_game';
+export const TRIVIA_FETCH_CATEGORIES_SUCCESS = 'trivia_fetch_categories_success';
+export const TRIVIA_FETCH_CATEGORIES_ERROR = 'trivia_fetch_categories_error';
 export const TRIVIA_FETCH_SUCCESS = 'trivia_fetch_success';
 export const TRIVIA_FETCH_ERROR = 'trivia_fetch_error';
 export const TRIVIA_NEXT_QUESTION = 'trivia_next_question';
