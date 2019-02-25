@@ -12,6 +12,7 @@
     "lottie-react-native": "^2.5.11",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-countdown-circle": "^3.0.0",
     "react-native-picker-select": "^6.0.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-segmented-control-tab": "^3.4.0",
