@@ -79,7 +79,7 @@ class TriviaLoader extends React.Component {
 }
 
 /**
- * TriviaScreen component StyleSheet.
+ * TriviaLoader component StyleSheet.
  */
 const styles = StyleSheet.create({
   container: {

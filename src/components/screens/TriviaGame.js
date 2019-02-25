@@ -5,17 +5,42 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Audio } from 'expo';
+import CountdownCircle from 'react-native-countdown-circle';
+import AnswerStatus from '../AnswerStatus';
 import Button from '../Button';
 import Question from '../Question';
 import TriviaLoader from '../TriviaLoader';
 import * as actions from '../../actions';
 import { capitalizeFirstLetter } from '../../Utils';
 
+const CORRECT_SOUND = require('../../../assets/sounds/correct.wav');
+const INCORRECT_SOUND = require('../../../assets/sounds/incorrect.wav');
+const TIMEOUT_SOUND = require('../../../assets/sounds/timeout.wav');
+
+const COUNTDOWN_TIME = 10;
+
 /**
  * @description	Trivia Game Screen.
  * @constructor
  */
 class TriviaGame extends React.Component {
+
+  constructor(props){
+		super(props);
+		/**
+		 * @typedef {Object} ComponentState
+		 * @property {Object[]} fontLoaded - Indicates whether custom fonts already loaded.
+		 */
+
+		/** @type {ComponentState} */
+		this.state = {
+      answerStatus: false,
+      answerType: 'correct',
+      fontLoaded: false,
+      countdownTime: COUNTDOWN_TIME,
+		};
+  }
 
   /**
 	 * Lifecycle event handler called just after the App loads into the DOM.
@@ -26,28 +51,65 @@ class TriviaGame extends React.Component {
     this.props.triviaFetch(
       selectedCategoryId, 
       selectedDifficulty, 
-      numberOfQuestions
+      numberOfQuestions,
     );
   }
+
+  /**
+   * Play the correct sound based on type
+   */
+  playSound = async (type) => {
+    await Audio.setIsEnabledAsync(true);
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync((type === 'correct') ? CORRECT_SOUND: (type === 'incorrect') ? INCORRECT_SOUND: TIMEOUT_SOUND);
+      await soundObject.playAsync();
+    } catch (error) {
+      // An error occurred!
+      console.log(error);
+    }
+  };
 
   /**
    * @description Call action to move to the next question or end the game.
    * @param {string} questionOption - The text of the selected question option.
    */
-  onPressOption = (questionOption) => {
-    this.props.nextQuestion(
-      questionOption,
-      this.props.currentQuestionIndex,
-      this.props.questions,
-      this.props.totalScore
-    );
+  handleAnswerSelection = (questionOption) => {
+    // Ignore if already selected (it can be a timeout)
+    if(this.state.answerStatus) return;
+    const {
+      currentQuestionIndex,
+      currentQuestion,
+      questions,
+      nextQuestion,
+      totalScore
+    } = this.props;
+    // TODO: Lottie  will release a onAnimationFinish event handler, replace later
+    const app = this;
+    const type = (questionOption === null) ? 'timeout': (questionOption === currentQuestion.correct_answer) ? 'correct' : 'incorrect';
+    this.playSound(type);
+    //console.log('---');
+    //console.log(currentQuestion.correct_answer);
+    //console.log(questionOption);
+    this.setState({answerStatus: true, answerType: type});
+    setTimeout(function(){ 
+      app.setState({answerStatus: false, countdownTime: COUNTDOWN_TIME});
+      nextQuestion(
+        questionOption,
+        currentQuestionIndex,
+        questions,
+        totalScore
+      );
+    }, 
+    1500);
   };
 
   render() {
     const {
       currentQuestionNumber,
       currentQuestion,
-      totalQuestionsSize
+      questions,
+      totalQuestionsSize,
     } = this.props;
 
     return (
@@ -57,13 +119,20 @@ class TriviaGame extends React.Component {
           loadingText="Requesting Questions"
           onRetryPressed={() => this.props.startGame()}
         >
-        {(false) ? (
+        {(this.state.answerStatus) &&
+        <View style={styles.answerStatus}>
+          <AnswerStatus
+            type={this.state.answerType}
+          />
+        </View>
+        }
+        {(questions.length === 0) ? (
           <View style={styles.noDataContainer}>
             <View style={styles.headerContainer}>
               <Text style={styles.headerTitle}>No Quiz Available</Text>
             </View>
-            <Text style={styles.noDataText}>No Quiz questions available for {this.props.selectedCategory} category,
-            {this.props.selectedDifficulty} difficulty, and {this.props.numberOfQuestions} questions.</Text>
+            <Text style={styles.noDataText}>No Quiz questions available for "{this.props.selectedCategory}" category,
+            "{this.props.selectedDifficulty}" difficulty, and {this.props.numberOfQuestions} questions.</Text>
             <Text style={styles.noDataText}>NOTE: Sometimes lowering the number of questions for the same category and difficulty works.</Text>
             <Button onPress={this.props.startGameSelection}>
               Try Again with new Options
@@ -75,15 +144,26 @@ class TriviaGame extends React.Component {
               <Text style={styles.headerTitle}>Question {currentQuestionNumber}/{totalQuestionsSize}</Text>
               <Text style={styles.categoryText}>{this.props.selectedCategory} - {capitalizeFirstLetter(currentQuestion.difficulty)}</Text>
             </View>
-            
             <Question
               question={currentQuestion.question}
               options={currentQuestion.options}
               type={currentQuestion.type}
               difficulty={currentQuestion.difficulty}
               category={currentQuestion.category}
-              onItemSelected={this.onPressOption}
+              onItemSelected={this.handleAnswerSelection}
             />
+            {(!this.state.answerStatus) &&
+            <View style={styles.countdownContainer}>
+            <CountdownCircle
+                seconds={this.state.countdownTime}
+                radius={40}
+                style={styles.itemStyle}
+                borderWidth={10}
+                color="#ff003f"
+                bgColor="#ffffff"
+                textStyle={{ fontSize: 20 }}
+                onTimeElapsed={() => this.handleAnswerSelection(null)}
+            /></View>}
           </View>
         )}
         </TriviaLoader>
@@ -95,6 +175,12 @@ class TriviaGame extends React.Component {
  * TriviaScreen component StyleSheet.
  */
 const styles = StyleSheet.create({
+  countdownContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    alignSelf: 'center'
+  },
   noDataContainer: {
     flex: 1,
     height: '100%',
@@ -107,6 +193,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
+  answerStatus: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 9999
   },
   noDataText: {
     fontSize: 20,

@@ -1,9 +1,10 @@
 import React from 'react';
 import {
   ImageBackground,
-  View,
-  Text,
+  Linking,
   StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Font } from 'expo';
@@ -13,6 +14,8 @@ import { startGameSelection } from '../../actions';
 // Game background image
 const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
 const GAME_TITLE_FONT = require('../../../assets/fonts/SaucerBB.ttf');
+
+const GITHUB_URL = 'https://github.com/computationalcore/react-native-trivia-quiz';
 
 /**
  * @description	Main Menu screen.
@@ -42,6 +45,19 @@ class MainMenu extends React.Component {
     this.setState({ fontLoaded: true });
   }
 
+  /**
+   * Open githubpage using default browser.
+   */
+  handleGithubClick = () => {
+    Linking.canOpenURL(GITHUB_URL).then(supported => {
+      if (supported) {
+        Linking.openURL(GITHUB_URL);
+      } else {
+        console.log("Don't know how to open URI: " + GITHUB_URL);
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -55,8 +71,11 @@ class MainMenu extends React.Component {
             <Text style={styles.gameTitle}> TRIVIA QUIZ </Text>
           </View>
           }
-          <Button style={styles.startButton} onPress={this.props.startGameSelection}>
-            Start Quiz
+          <Button style={styles.playButton} onPress={this.props.startGameSelection}>
+            Play
+          </Button>
+          <Button style={styles.githubButton} onPress={this.handleGithubClick}>
+            Open Github Page
           </Button>
         </ImageBackground>
       </View>
@@ -83,8 +102,12 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 60
   },
-  startButton: {
-    marginBottom: 30
+  playButton: {
+    marginBottom: 10
+  },
+  githubButton: {
+    marginBottom: 50,
+    backgroundColor: '#DC143C'
   },
   imageBackground: {
     flex: 1,

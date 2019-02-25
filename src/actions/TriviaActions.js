@@ -20,7 +20,7 @@ export const triviaCategoryFetch = () => {
   
   return (dispatch) => {
     TriviaAPI.getCategories().then((categories) => {
-      console.log(categories);
+      //console.log(categories);
       categories = categories.map(
         category => {
           return {
@@ -59,7 +59,7 @@ export const triviaFetch = (selectedCategoryId, selectedDifficulty, numberOfQues
             category: question.category,
             difficulty: question.difficulty,
             type: question.type,
-            correct_answer: question.correct_answer,
+            correct_answer: entities.decode(question.correct_answer),
             question: entities.decode(question.question)
           }
         }

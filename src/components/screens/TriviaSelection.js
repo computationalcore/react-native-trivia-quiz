@@ -78,7 +78,6 @@ class TriviaSelection extends React.Component {
     );
   }
 
-
   render() {
     return (
       (this.state.fontLoaded) &&
@@ -86,7 +85,7 @@ class TriviaSelection extends React.Component {
         loading={this.props.loading}
         error={this.props.error}
         loadingText="Requesting Categories"
-        onRetryPressed={() => this.props.startGame()}
+        onRetryPressed={() => this.props.startGameSelection()}
       >
         <View style={styles.container}>
           <View style={styles.gameTitleContainer}>
