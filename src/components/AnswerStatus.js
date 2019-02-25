@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { Font } from 'expo';
 import LottieView from 'lottie-react-native';
+import { scale, moderateScale, verticalScale} from '../Scaling';
 
 const STATUS_FONT = require('../../assets/fonts/BadaboomBB_Reg.ttf');
 const CORRECT_ANIMATION = require('../../assets/animations/433-checked-done.json');
@@ -104,14 +105,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
   statusAnimation: {
-    width: 300,
-    height: 300
+    width: scale(300),
+    height: scale(300)
   },
   statusText: {
     fontFamily: "status-text",
-    fontSize: 40,
+    fontSize: moderateScale(40),
     textShadowRadius: 10,
-    marginTop: -60
+    marginTop: moderateScale(-60)
   },
   correctText: {
     color: '#00C871'

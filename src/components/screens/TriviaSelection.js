@@ -11,6 +11,7 @@ import { Font } from 'expo';
 import Button from '../Button';
 import TriviaLoader from '../TriviaLoader';
 import * as actions from '../../actions';
+import { scale, moderateScale, verticalScale} from '../../Scaling';
 
 const SELECT_FONT = require('../../../assets/fonts/BadaboomBB_Reg.ttf');
 
@@ -94,7 +95,7 @@ class TriviaSelection extends React.Component {
           <View style={styles.Separator} />
           <Text style={styles.headerText}>Category</Text>
           <RNPickerSelect
-            style={{ fontSize: 20 }}
+            style={pickerSelectStyles}
             placeholder={{}}
             value={this.state.selectedCategoryId}
             items={this.props.categories}
@@ -126,11 +127,12 @@ class TriviaSelection extends React.Component {
   }
 }
 
+/* TriviaSelection StyleSheet */
 const styles = StyleSheet.create({
   gameTitle: {
     fontFamily: 'select-font',
     color: '#000000',
-    fontSize: 60
+    fontSize: moderateScale(60)
   },
   gameTitleContainer: {
     textAlign: 'center'
@@ -152,42 +154,66 @@ const styles = StyleSheet.create({
   tabViewText: {
     color: '#444444',
     fontWeight: 'bold',
-    marginTop: 50,
-    fontSize: 18,
+    marginTop: scale(50),
+    fontSize: moderateScale(18),
   },
   titleText: {
     color: '#444444',
-    padding: 20,
-    fontSize: 14,
+    padding: scale(20),
+    fontSize: moderateScale(14),
     fontWeight: '500',
   },
   headerText: {
     fontFamily: 'select-font',
-    padding: 8,
-    fontSize: 24,
+    padding: scale(8),
+    fontSize: moderateScale(24),
     color: '#444444',
   },
   tabContent: {
     color: '#444444',
-    fontSize: 18,
-    margin: 24,
+    fontSize: scale(18),
+    margin: scale(24),
   },
   Separator: {
-    marginHorizontal: -10,
+    marginHorizontal: scale(-10),
     alignSelf: 'stretch',
     borderTopWidth: 1,
     borderTopColor: '#888888',
-    marginTop: 24,
+    marginTop: scale(24),
   },
   tabStyle: {
     borderColor: '#D52C43',
-    paddingHorizontal: 10,
+    paddingHorizontal: scale(10),
   },
   activeTabStyle: {
     backgroundColor: '#D52C43',
   },
   tabTextStyle: {
     color: '#D52C43',
+  },
+});
+
+/* RNPickerSelect StyleSheet */
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      fontSize: scale(24),
+      textAlign: 'center',
+      fontWeight: "900",
+      paddingVertical: 12,
+      paddingHorizontal: 10,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 4,
+      color: 'black',
+      paddingRight: 30, // to ensure the text is never behind the icon
+  },
+  inputAndroid: {
+      paddingHorizontal: 10,
+      paddingVertical: 8,
+      borderWidth: 0.5,
+      borderRadius: 8,
+      color: 'black',
+      paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
 

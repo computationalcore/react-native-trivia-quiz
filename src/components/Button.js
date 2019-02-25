@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { scale, moderateScale } from '../Scaling';
 
 /**
  * This object sets default values to the optional props.
@@ -37,9 +38,9 @@ const Button = ({ onPress, children, style }) => {
 const styles = {
   textStyle: {
     flex: 1,
-    padding: 12,
+    padding: scale(12),
     color: '#ffffff',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight:'normal',
     textAlign: 'center',
     textShadowColor:'#000000',
@@ -47,10 +48,10 @@ const styles = {
     textShadowRadius:0,
   },
   buttonStyle: {
-    height: 60,
+    height: moderateScale(60),
     alignSelf: 'stretch',
-    minHeight: 32,
-    margin: 10,
+    minHeight: moderateScale(32),
+    margin: scale(10),
     backgroundColor: 'rgba(64, 64, 255, 0.8)',
     borderRadius: 8
   }

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { scale, moderateScale } from '../Scaling';
 
 /**
  * This object is used for type checking the props of the component.
@@ -64,9 +65,9 @@ const styles = StyleSheet.create({
 
   quizOptionDescription: {
     flex: 1,
-    padding: 12,
+    padding: scale(12),
     color: '#ffffff',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight:'normal',
     textAlign: 'center',
     textShadowColor:'#000000',

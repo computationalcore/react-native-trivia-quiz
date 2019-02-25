@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  ScrollView,
   StyleSheet,
   ImageBackground,
 } from 'react-native';
@@ -10,7 +11,7 @@ import { Audio, Font } from 'expo';
 import LottieView from 'lottie-react-native';
 import Button from '../Button';
 import { goToMainMenu, startGameSelection } from '../../actions';
-
+import { scale, moderateScale, verticalScale} from '../../Scaling';
 
 // Static assets
 const GOOD_ANIMATION = require('../../../assets/animations/677-trophy.json');
@@ -114,7 +115,10 @@ class GameOver extends React.Component {
             resizeMode="cover"
           >
           {(this.state.fontLoaded) &&
-            <View style={styles.gameOverData}>
+          <View style={styles.gameOverData}>
+            <ScrollView>
+
+          <View style={styles.gameOverInternal}>
               <Text style={styles.gameOverTitle}>GAME OVER</Text>
               <LottieView
                 style={styles.statusAnimation}
@@ -133,6 +137,8 @@ class GameOver extends React.Component {
               <Button style={styles.mainMenuButton} onPress={goToMainMenu}>
                 Back to Main Menu
               </Button>
+            </View>
+            </ScrollView>
             </View>
           }
         </ImageBackground>
@@ -156,9 +162,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   gameOverData: {
-    padding: 16,
-    marginTop: 32,
-    marginBottom: 32,
+    padding: scale(16),
+    marginTop: scale(32),
+    marginBottom: scale(32),
     alignSelf: 'stretch',
     alignItems: 'center',
     borderWidth: 2,
@@ -167,8 +173,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
+  gameOverInternal: {
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   gameOverMessage: {
-    fontSize: 28,
+    fontSize: moderateScale(28),
     textAlign: 'center',
     fontWeight: "900"
   },
@@ -176,33 +187,33 @@ const styles = StyleSheet.create({
     fontFamily: "game-over-title",
     color: '#000000',
     textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
-    fontSize: 78,
-    marginBottom: -40,
+    textShadowRadius: scale(10),
+    fontSize: moderateScale(78),
+    marginBottom: scale(-40),
     zIndex: 9999
   },
   gameScoreText: {
     fontFamily: 'game-over',
     fontWeight: "900",
-    fontSize: 32,
-    marginTop: 5,
-    marginBottom: 5,
+    fontSize: moderateScale(32),
+    marginTop: scale(5),
+    marginBottom: scale(5),
   },
   gameStatusText: {
     fontFamily: 'game-over',
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: "900",
     color: '#8f61f9',
     marginTop: 2,
     marginBottom: 2,
   },
   mainMenuButton: {
-    marginBottom: 50,
+    marginBottom: scale(50),
     backgroundColor: '#DC143C'
   },
   statusAnimation: {
-    width: 200,
-    height: 200
+    width: scale(200),
+    height: scale(200)
   },
 });
 

@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [2.1](../../releases/tag/v2.1)
 - Add Game Over screen sounds and animations based on Sound
+- Add scaling strategy for components styles
 
 ## [2.0](../../releases/tag/v2.0)
 - Add Category Selection

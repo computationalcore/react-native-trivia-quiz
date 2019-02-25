@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Button from './Button';
+import { scale, moderateScale, verticalScale} from '../Scaling';
 
 // Assets
 const BACKGROUND_IMAGE = require('../../assets/images/game_background.png');
@@ -100,28 +101,28 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
   loaderAnimation: {
-    width: 200,
-    height: 200
+    width: moderateScale(200),
+    height: verticalScale(200)
   },
   errorAnimation: {
-    width: 100,
-    height: 100
+    width: moderateScale(100),
+    height: verticalScale(100)
   },
   loaderText: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
     color: '#00AA38'
   },
   errorText: {
-    fontSize: 30,
+    fontSize: moderateScale(30),
     color: '#FF4423',
     textShadowOffset: {width: -1, height: 1},
     textShadowRadius: 10,
-    marginBottom: 10,
+    marginBottom: scale(10),
   },
   errorDescription: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     textAlign: 'center',
     marginBottom: 0,
   },

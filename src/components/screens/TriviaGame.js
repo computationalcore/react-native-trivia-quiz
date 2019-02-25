@@ -13,6 +13,7 @@ import Question from '../Question';
 import TriviaLoader from '../TriviaLoader';
 import * as actions from '../../actions';
 import { capitalizeFirstLetter } from '../../Utils';
+import { scale, moderateScale, verticalScale} from '../../Scaling';
 
 const CORRECT_SOUND = require('../../../assets/sounds/correct.wav');
 const INCORRECT_SOUND = require('../../../assets/sounds/incorrect.wav');
@@ -156,12 +157,12 @@ class TriviaGame extends React.Component {
             <View style={styles.countdownContainer}>
             <CountdownCircle
                 seconds={this.state.countdownTime}
-                radius={40}
+                radius={scale(40)}
                 style={styles.itemStyle}
-                borderWidth={10}
+                borderWidth={scale(10)}
                 color="#ff003f"
                 bgColor="#ffffff"
-                textStyle={{ fontSize: 20 }}
+                textStyle={{ fontSize: moderateScale(20) }}
                 onTimeElapsed={() => this.handleAnswerSelection(null)}
             /></View>}
           </View>
@@ -201,8 +202,8 @@ const styles = StyleSheet.create({
     zIndex: 9999
   },
   noDataText: {
-    fontSize: 20,
-    padding: 10,
+    fontSize: moderateScale(20),
+    padding: scale(10),
     textAlign: 'justify',
   },
   container: {
@@ -213,27 +214,27 @@ const styles = StyleSheet.create({
     //flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingRight: 24,
-    paddingLeft: 24,
-    paddingTop: 12,
-    paddingBottom: 12,
+    paddingRight: scale(24),
+    paddingLeft: scale(24),
+    paddingTop: scale(12),
+    paddingBottom: scale(12),
     backgroundColor: '#00BCD4',
     borderWidth: 2,
     borderRadius: 8,
     borderColor: '#ffffff',
-    margin: 8,
-    marginTop: 36,
+    margin: scale(8),
+    marginTop: scale(36),
   },
   headerTitle: {
     fontWeight: '300',
     color: '#ffffff',
-    fontSize: 28,
+    fontSize: moderateScale(28),
     fontWeight: '900',
   },
   categoryText: {
     fontWeight: '300',
     color: '#ffffff',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: '900',
   },
 });

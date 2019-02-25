@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Font } from 'expo';
 import Button from '../Button';
 import { startGameSelection } from '../../actions';
+import { scale, moderateScale, verticalScale} from '../../Scaling';
 
 // Game background image
 const BACKGROUND_IMAGE = require('../../../assets/images/game_background.png');
@@ -93,20 +94,20 @@ const styles = StyleSheet.create({
   },
   gameTitleContainer: {
     flex: 1,
-    marginTop: 60,
+    marginTop: scale(60),
     alignSelf: 'center',
     justifyContent: 'flex-start',
   },
   gameTitle: {
     fontFamily: "game-title",
     color: '#000000',
-    fontSize: 60
+    fontSize: moderateScale(50)
   },
   playButton: {
-    marginBottom: 10
+    marginBottom: scale(10)
   },
   githubButton: {
-    marginBottom: 50,
+    marginBottom: scale(50),
     backgroundColor: '#DC143C'
   },
   imageBackground: {

@@ -7,6 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import QuestionOptionItem from './QuestionOptionItem';
+import { scale, moderateScale, verticalScale} from '../Scaling';
 
 /**
  * This object is used for type checking the props of the component.
@@ -77,16 +78,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 16,
-    marginRight: 16,
+    marginLeft: scale(16),
+    marginRight: scale(16),
   },
 
   questionData: {
-    padding: 16,
-    marginTop: 32,
-    marginBottom: 32,
+    padding: scale(16),
+    marginTop: scale(32),
+    marginBottom: scale(32),
     alignSelf: 'stretch',
-    maxHeight: 280,
+    maxHeight: verticalScale(280),
     borderWidth: 2,
     borderRadius: 8,
     borderColor: '#ffffff',
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
 
   questionDescription: {
     color: '#000',
-    fontSize: 20,
+    fontSize: moderateScale(20),
     textAlign: 'center',
   },
 
