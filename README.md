@@ -1,6 +1,7 @@
 # React Native Trivia Quiz
 
-React Native Trivia Quiz app. The questions are requested using [Open Trivia Database API](https://opentdb.com/).
+React Native Trivia Quiz app. The questions are acquired using the [Open Trivia Database API](https://opentdb.com/).
+![](https://github.com/computationalcore/react-native-trivia-quiz/raw/assets/app.gif)
 
 ## Getting Started
 
@@ -45,8 +46,9 @@ npm start
 ## How to Play
 
 - Open the app 
-- Click at "Start Quiz" button
-- Answer each one of the ten questions by choosing one of the options
+- Click at "Play" button
+- Select Quiz Options and click Start Quiz
+- Answer each one of the questions in max 10 seconds per question
 - When all questions are answered it shows the game over screen with total score and elapsed time
 
 ## Assets Credits
@@ -56,6 +58,12 @@ npm start
 * [Loading Hamster](https://lottiefiles.com/2151-loading-hamster) by [Nabeel Shah](https://lottiefiles.com/nabeelshah7)
 
 * [Connection error](https://lottiefiles.com/4386-connection-error) by [Lorena Villanueva García](https://lottiefiles.com/lorenavillanueva)
+
+* [Checked Done](https://lottiefiles.com/433-checked-done) by [LottieFiles](https://lottiefiles.com/lottiefiles)
+
+* [X Pop](https://lottiefiles.com/101-x-pop) by [LottieFiles](https://lottiefiles.com/lottiefiles)
+
+* [Notification](https://lottiefiles.com/4284-notification) by [Changhyun Lee](https://lottiefiles.com/jony)
 
 #### Fonts
 
@@ -68,6 +76,15 @@ npm start
 #### Images
 * [Faq free icon](https://www.flaticon.com/free-icon/faq_1580270) by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com)
 
+#### Sounds
+
+* [Cartoon Oh-Oh](https://freesound.org/people/dersuperanton/sounds/435883/) by [dersuperanton](https://freesound.org/people/dersuperanton/)
+
+* [Grinched Font](https://www.1001fonts.com/grinched-font.html) by [Sharkshock](https://www.1001fonts.com/users/sharkshock/)
+
+* [success 2](https://freesound.org/people/Leszek_Szary/sounds/171670/) by [Leszek_Szary](https://freesound.org/people/Leszek_Szary/)
+
+* [Bell, Counter, A.wav](https://freesound.org/people/InspectorJ/sounds/415510/) by [InspectorJ](https://freesound.org/people/InspectorJ/)
 
 ## Authors
 Vin Busquet
