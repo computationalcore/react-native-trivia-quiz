@@ -1,6 +1,6 @@
 # React Native Trivia Quiz
 
-React Native Trivia Quiz app. The questions are acquired using the [Open Trivia Database API](https://opentdb.com/).
+A simple trivia game built with React Native, Redux, and the [Open Trivia Database](https://opentdb.com/).
 ![](https://github.com/computationalcore/react-native-trivia-quiz/raw/assets/app.gif)
 
 ## Getting Started
@@ -13,7 +13,7 @@ purposes.
 The project can be built with npm or yarn, so choose one of the approach bellow in case you don't 
 have any installed on your system. 
 
-* Yarn is a package manager built by Facebook Team and seems to be faster than npm in general.  [Download Yarn](https://yarnpkg.com/en/docs/install) (RECOMMENDED).
+* Yarn is a package manager built by Facebook Team and seems to be faster than npm in general.  [Download Yarn](https://yarnpkg.com/en/docs/install). (RECOMMENDED)
 
 or
 
@@ -65,6 +65,12 @@ npm start
 
 * [Notification](https://lottiefiles.com/4284-notification) by [Changhyun Lee](https://lottiefiles.com/jony)
 
+* [Crying](https://lottiefiles.com/823-crying) by [Rogger Tân](https://lottiefiles.com/leminhtanvus)
+
+* [Trophy](https://lottiefiles.com/677-trophy by [Michael Harvey](https://lottiefiles.com/marvey)
+
+* [Little Girl Jumping - Loader](https://lottiefiles.com/2144-little-girl-jumping-loader) by [Jignesh Gajjar](https://lottiefiles.com/jigneshgajjar)
+
 #### Fonts
 
 * [Saucer BB Font](https://www.1001fonts.com/saucer-bb-font.html) by [Blambot Comic Fonts](https://www.1001fonts.com/users/blambot/)
@@ -86,6 +92,11 @@ npm start
 
 * [Bell, Counter, A.wav](https://freesound.org/people/InspectorJ/sounds/415510/) by [InspectorJ](https://freesound.org/people/InspectorJ/)
 
+* [Sad Trombone.wav](https://freesound.org/people/Benboncan/sounds/73581/) by [Benboncan](https://freesound.org/people/Benboncan/)
+
+* [Celebration](https://freesound.org/people/sonsdebarcelona/sounds/221937/) by [sonsdebarcelona](https://freesound.org/people/sonsdebarcelona/)
+
+* [Jazzy Chords](https://freesound.org/people/NenadSimic/sounds/150879/) by [NenadSimic](https://freesound.org/people/NenadSimic/)
 ## Authors
 Vin Busquet
 * [https://github.com/computationalcore](https://github.com/computationalcore)

@@ -1,4 +1,5 @@
 import {
+  TRIVIA_MAIN_MENU,
   TRIVIA_SELECT_OPTIONS_GAME,
   TRIVIA_START_GAME,
   TRIVIA_FETCH_CATEGORIES_SUCCESS,
@@ -35,6 +36,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case TRIVIA_MAIN_MENU:
+      return INITIAL_STATE;
     case TRIVIA_SELECT_OPTIONS_GAME:
       return INITIAL_STATE;
     case TRIVIA_START_GAME:

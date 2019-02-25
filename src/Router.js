@@ -12,7 +12,7 @@ const RouterComponent = () => {
         <Scene key="mainMenu" component={MainMenu} initial />
         <Scene key="triviaSelection" component={TriviaSelection}  />
         <Scene key="triviaGame" component={TriviaGame} />
-        <Scene key="gameOver" component={GameOver}  />
+        <Scene key="gameOver" component={GameOver} />
       </Scene>
     </Router>
   );

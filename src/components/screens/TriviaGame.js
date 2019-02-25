@@ -56,7 +56,7 @@ class TriviaGame extends React.Component {
   }
 
   /**
-   * Play the correct sound based on type
+   * Play the correct sound based on answer status type
    */
   playSound = async (type) => {
     await Audio.setIsEnabledAsync(true);

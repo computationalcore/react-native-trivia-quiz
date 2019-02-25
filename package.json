@@ -1,4 +1,29 @@
 {
+  "name": "react-native-trivia-quiz",
+  "version": "2.1.0",
+  "description": "A simple trivia game built with React Native, Redux, and the Open Trivia Database Trivia.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/computationalcore/react-native-trivia-quiz"
+  },
+  "keywords": [
+    "trivia",
+    "quiz",
+    "trivia quiz",
+    "trivia react native",
+    "trivia quiz react native",
+    "quiz react native",
+    "react native",
+    "open trivia database api",
+    "open trivia db",
+    "opentdb"
+  ],
+  "author": "Vin Busquet",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/computationalcore/react-native-trivia-quiz/issues"
+  },
+  "homepage": "https://github.com/computationalcore/react-native-trivia-quiz",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -23,6 +48,5 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
-  },
-  "private": true
+  }
 }

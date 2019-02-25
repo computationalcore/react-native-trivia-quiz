@@ -2,6 +2,7 @@ import { Actions } from 'react-native-router-flux';
 import { AllHtmlEntities as entities } from 'html-entities';
 import sortBy from 'sort-by';
 import {
+  TRIVIA_MAIN_MENU,
   TRIVIA_SELECT_OPTIONS_GAME,
   TRIVIA_START_GAME,
   TRIVIA_FETCH_CATEGORIES_SUCCESS,
@@ -122,5 +123,17 @@ export const startGameSelection = () => {
     dispatch({ type: TRIVIA_SELECT_OPTIONS_GAME });
     // Call start game and disable back action
     Actions.triviaSelection({ type: 'reset' });
+  }
+};
+
+/**
+ * @description Go to Main Menu Screen.
+ */
+export const goToMainMenu = () => {
+  
+  return (dispatch) => {
+    dispatch({ type: TRIVIA_MAIN_MENU });
+    // Call start game and disable back action
+    Actions.mainMenu({ type: 'reset' });
   }
 };
