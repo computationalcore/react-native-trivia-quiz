@@ -13,11 +13,14 @@ import Question from '../Question';
 import TriviaLoader from '../TriviaLoader';
 import * as actions from '../../actions';
 import { capitalizeFirstLetter } from '../../Utils';
-import { scale, moderateScale, verticalScale} from '../../Scaling';
+import { scale, moderateScale } from '../../Scaling';
 
-const CORRECT_SOUND = require('../../../assets/sounds/correct.wav');
-const INCORRECT_SOUND = require('../../../assets/sounds/incorrect.wav');
-const TIMEOUT_SOUND = require('../../../assets/sounds/timeout.wav');
+// Sound setup
+const AVAILABLE_SOUNDS = {
+  correct: require('../../../assets/sounds/correct.wav'),
+  incorrect: require('../../../assets/sounds/incorrect.wav'),
+  timeout: require('../../../assets/sounds/timeout.wav')
+};
 
 const COUNTDOWN_TIME = 10;
 
@@ -40,6 +43,7 @@ class TriviaGame extends React.Component {
       answerType: 'correct',
       fontLoaded: false,
       countdownTime: COUNTDOWN_TIME,
+      soundController: null,
 		};
   }
 
@@ -56,15 +60,22 @@ class TriviaGame extends React.Component {
     );
   }
 
+  async componentDidMount() {
+    // Preload sound controller
+    await Audio.setIsEnabledAsync(true);
+    this.setState({
+      soundController: new Audio.Sound()
+    });
+  }
+
   /**
-   * Play the correct sound based on answer status type
+   * Play the correct sound based on answer status type.
    */
   playSound = async (type) => {
-    await Audio.setIsEnabledAsync(true);
-    const soundObject = new Audio.Sound();
     try {
-      await soundObject.loadAsync((type === 'correct') ? CORRECT_SOUND: (type === 'incorrect') ? INCORRECT_SOUND: TIMEOUT_SOUND);
-      await soundObject.playAsync();
+      await this.state.soundController.unloadAsync();
+      await this.state.soundController.loadAsync(AVAILABLE_SOUNDS[type]);
+      await this.state.soundController.playAsync();
     } catch (error) {
       // An error occurred!
       console.log(error);

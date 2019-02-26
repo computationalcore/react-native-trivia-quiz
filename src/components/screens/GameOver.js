@@ -66,6 +66,7 @@ class GameOver extends React.Component {
     await Audio.setIsEnabledAsync(true);
     const soundObject = new Audio.Sound();
     try {
+      await soundObject.unloadAsync();
       await soundObject.loadAsync((scorePercent >= 0.8) ? GOOD_SOUND: (scorePercent > 0.5) ? AVERAGE_SOUND: BAD_SOUND);
       await soundObject.playAsync();
     } catch (error) {

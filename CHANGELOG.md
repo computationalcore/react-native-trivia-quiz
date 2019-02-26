@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
+## [2.2](../../releases/tag/v2.2)
+- Improve game sound logic
+
 ## [2.1](../../releases/tag/v2.1)
 - Improve Game Over screen with sounds and animations
 - Add scaling strategy for components styles
