@@ -34,7 +34,7 @@ export const getQuestions = async (amount=10, category=-1, difficulty='Mixed') =
 }
 
 /**
- * @description Get all avalailables categories.
+ * @description Get all available categories.
  */
 export const getCategories = async () => {
 	return fetch(`${API_URL}/api_category.php`)
