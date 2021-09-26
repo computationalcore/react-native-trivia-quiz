@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Audio } from 'expo-av';
-import CountdownCircle from 'react-native-countdown-circle';
+import CountdownCircle from '../CountdownCircle';
 import AnswerStatus from '../AnswerStatus';
 import Button from '../Button';
 import Question from '../Question';
