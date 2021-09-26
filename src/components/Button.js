@@ -1,13 +1,13 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { scale, moderateScale } from '../Scaling';
+import React from "react";
+import { Text, TouchableOpacity } from "react-native";
+import { scale, moderateScale } from "../Scaling";
 
 /**
  * This object sets default values to the optional props.
  */
 const defaultProps = {
   style: {},
-  onPress: () => {}
+  onPress: () => {},
 };
 
 /**
@@ -19,15 +19,13 @@ const defaultProps = {
  * @constructor
  * @param {Object} props - The props that were defined by the caller of this component.
  * @param {onPress} props.onPress - The size of the spinner.
-*/
+ */
 const Button = ({ onPress, children, style }) => {
   const { buttonStyle, textStyle } = styles;
 
   return (
     <TouchableOpacity onPress={onPress} style={[buttonStyle, style]}>
-      <Text style={textStyle}>
-        {children}
-      </Text>
+      <Text style={textStyle}>{children}</Text>
     </TouchableOpacity>
   );
 };
@@ -37,24 +35,27 @@ const Button = ({ onPress, children, style }) => {
  */
 const styles = {
   textStyle: {
-    flex: 1,
     padding: scale(12),
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: moderateScale(24),
-    fontWeight:'normal',
-    textAlign: 'center',
-    textShadowColor:'#000000',
-    textShadowOffset:{width: 2, height: 2},
-    textShadowRadius:0,
+    fontWeight: "normal",
+    textAlign: "center",
+    textShadowColor: "#000000",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 0,
   },
   buttonStyle: {
+    display: 'flex',
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     height: moderateScale(60),
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     minHeight: moderateScale(32),
     margin: scale(10),
-    backgroundColor: 'rgba(64, 64, 255, 0.8)',
-    borderRadius: 8
-  }
+    backgroundColor: "rgba(64, 64, 255, 0.8)",
+    borderRadius: 8,
+  },
 };
 
 // Assign default values to the optional props
