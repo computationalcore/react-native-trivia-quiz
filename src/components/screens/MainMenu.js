@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Font } from 'expo';
+import * as Font from 'expo-font';
 import Button from '../Button';
 import { startGameSelection } from '../../actions';
 import { scale, moderateScale, verticalScale} from '../../Scaling';

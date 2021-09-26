@@ -3,7 +3,7 @@
     "name": "React Trivia Game",
     "slug": "react-trivia-quiz",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android"
@@ -24,7 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.vinbusquet.reacttriviagame"
+      "bundleIdentifier": "com.vinbusquet.react-trivia-game"
     },
     "android": {
       "package": "com.vinbusquet.triviagame"

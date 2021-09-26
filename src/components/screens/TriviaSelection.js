@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 import RNPickerSelect from 'react-native-picker-select';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
-import { Font } from 'expo';
+import * as Font from 'expo-font';
 import Button from '../Button';
 import TriviaLoader from '../TriviaLoader';
 import * as actions from '../../actions';
@@ -41,15 +41,10 @@ class TriviaSelection extends React.Component {
     }		
   }
 
-  /**
-	 * Lifecycle event handler called just after the App loads into the DOM.
-	 * Call the action to fetch quiz data.
-	 */
-  componentWillMount() {
-    this.props.triviaCategoryFetch();
-  }
-
   async componentDidMount() {
+    // Call the action to fetch quiz data.
+    this.props.triviaCategoryFetch();
+
     await Font.loadAsync({
       'select-font': SELECT_FONT,
     });

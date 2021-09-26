@@ -32,22 +32,30 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^32.0.0",
+    "@react-native-community/masked-view": "0.1.5",
+    "expo": "^36.0.0",
+    "expo-av": "~8.0.0",
+    "expo-font": "~8.0.0",
     "html-entities": "^1.2.1",
     "lottie-react-native": "^2.5.11",
     "mem": "^4.0.0",
-    "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react": "16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-countdown-circle": "^3.0.0",
+    "react-native-gesture-handler": "~1.5.0",
     "react-native-picker-select": "^6.0.0",
+    "react-native-reanimated": "~1.4.0",
     "react-native-router-flux": "^4.0.6",
+    "react-native-safe-area-context": "0.6.0",
+    "react-native-screens": "2.0.0-alpha.12",
     "react-native-segmented-control-tab": "^3.4.0",
+    "react-navigation": "^4.4.4",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "7.1.0"
   }
 }

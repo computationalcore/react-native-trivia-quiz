@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Audio } from 'expo';
+import { Audio } from 'expo-av';
 import CountdownCircle from 'react-native-countdown-circle';
 import AnswerStatus from '../AnswerStatus';
 import Button from '../Button';
@@ -47,20 +47,15 @@ class TriviaGame extends React.Component {
 		};
   }
 
-  /**
-	 * Lifecycle event handler called just after the App loads into the DOM.
-	 * Call the action to fetch quiz data.
-	 */
-  componentWillMount() {
+  async componentDidMount() {
+    // Call the action to fetch quiz data.
     const { selectedCategoryId, selectedDifficulty, numberOfQuestions } = this.props;
     this.props.triviaFetch(
       selectedCategoryId, 
       selectedDifficulty, 
       numberOfQuestions,
     );
-  }
 
-  async componentDidMount() {
     // Preload sound controller
     await Audio.setIsEnabledAsync(true);
     this.setState({

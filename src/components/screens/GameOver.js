@@ -7,7 +7,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Audio, Font } from 'expo';
+import { Audio } from 'expo-av';
+import * as Font from 'expo-font';
 import LottieView from 'lottie-react-native';
 import Button from '../Button';
 import { goToMainMenu, startGameSelection } from '../../actions';

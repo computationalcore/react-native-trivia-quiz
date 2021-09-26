@@ -5,7 +5,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { Font } from 'expo';
+import * as Font from 'expo-font';
 import LottieView from 'lottie-react-native';
 import { scale, moderateScale, verticalScale} from '../Scaling';
 
