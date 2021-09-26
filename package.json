@@ -1,6 +1,6 @@
 {
   "name": "react-native-trivia-quiz",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "A simple trivia game built with React Native, Redux, and the Open Trivia Database Trivia.",
   "repository": {
     "type": "git",
@@ -31,24 +31,40 @@
     "ios": "expo start --ios",
     "eject": "expo eject"
   },
+  "jest": {
+    "preset": "jest-expo"
+  },
   "dependencies": {
-    "@react-native-community/masked-view": "0.1.5",
-    "expo": "^36.0.0",
-    "expo-av": "~8.0.0",
-    "expo-font": "~8.0.0",
+    "@expo/vector-icons": "^12.0.0",
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/bottom-tabs": "^6.0.5",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native-stack": "^6.1.0",
+    "expo": "~42.0.1",
+    "expo-asset": "~8.3.2",
+    "expo-av": "~9.2.1",
+    "expo-constants": "~11.0.1",
+    "expo-font": "~9.2.1",
+    "expo-linking": "~2.3.1",
+    "expo-splash-screen": "~0.11.2",
+    "expo-status-bar": "~1.0.4",
+    "expo-web-browser": "~9.2.0",
     "html-entities": "^1.2.1",
-    "lottie-react-native": "^2.5.11",
+    "lottie-ios": "^3.2.3",
+    "lottie-react-native": "4.0.2",
     "mem": "^4.0.0",
-    "react": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
-    "react-native-countdown-circle": "^3.0.0",
-    "react-native-gesture-handler": "~1.5.0",
+    "prop-types": "^15.7.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-gesture-handler": "~1.10.2",
     "react-native-picker-select": "^6.0.0",
-    "react-native-reanimated": "~1.4.0",
-    "react-native-router-flux": "^4.0.6",
-    "react-native-safe-area-context": "0.6.0",
-    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-reanimated": "~2.2.0",
+    "react-native-router-flux": "^4.3.1",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
     "react-native-segmented-control-tab": "^3.4.0",
+    "react-native-web": "~0.13.12",
     "react-navigation": "^4.4.4",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
@@ -56,6 +72,7 @@
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "7.1.0"
+    "@babel/core": "^7.9.0",
+    "jest-expo": "~41.0.0-beta.0"
   }
 }
