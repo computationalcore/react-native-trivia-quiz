@@ -1,6 +1,6 @@
 {
   "name": "react-native-trivia-quiz",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "A simple trivia game built with React Native, Redux, and the Open Trivia Database Trivia.",
   "repository": {
     "type": "git",
